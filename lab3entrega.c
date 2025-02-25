@@ -43,8 +43,8 @@ void inserir(LDE *lista, int valor){
 }
 
 void remover(LDE *lista, int valor) {
-    Celula *anterior = NULL;
-    Celula *atual = lista->primeiro;
+    No *anterior = NULL;
+    No *atual = lista->inicio;
     while(atual != NULL && atual->valor != valor){
         anterior = atual;
         atual = atual->proximo;
@@ -53,13 +53,13 @@ void remover(LDE *lista, int valor) {
         return;
     }
     if(anterior == NULL){
-        lista->primeiro = atual->proximo;
+        lista->inicio = atual->proximo;
     }
     else{
         anterior->proximo = atual->proximo;
     }
     free(atual);
-    lista->qtd--;
+    lista->quantidade--;
 
 }
 
