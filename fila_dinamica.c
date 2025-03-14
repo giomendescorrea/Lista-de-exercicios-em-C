@@ -34,6 +34,25 @@ void enfileirar(Fila *fila, int valor){
     fila->qtde++;
 }
 
+int desenfileirar(Fila *fila){
+    if(fila->qtde == 0){
+        return 1;
+    }
+    Celula *liberar = fila->head;
+    int valor = fila->head->valor;
+    if(fila->qtde == 1){
+        fila->head = NULL;
+        fila->tail = NULL;
+        
+    } else{
+        fila->head->proximo->anterior = NULL;
+        fila->head = fila->head->proximo;
+    }
+    fila->qtde--;
+    free(liberar);
+    return valor;
+}
+
 void mostrar_fila(Fila *fila, int inversa){
     if(!inversa){
         Celula *atual = fila->head;
@@ -66,6 +85,10 @@ int main(){
     enfileirar(fila, 5);
     mostrar_fila(fila, 0);
     mostrar_fila(fila, 1);
+    enfileirar(fila, 15);
+    mostrar_fila(fila, 0);
+    desenfileirar(fila);
+    mostrar_fila(fila, 0);
 }
 
 
