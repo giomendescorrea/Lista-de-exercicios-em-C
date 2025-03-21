@@ -37,6 +37,20 @@ void push(Pilha *pilha, int valor){
     pilha->qtd++;
 }
 
+void pop(Pilha *pilha){
+    if(pilha->qtd == 0){
+        return;
+    }
+    else if(pilha->qtd == 1){
+        pilha->topo = NULL;
+    }
+    else{
+        pilha->topo->anterior->proximo = NULL;
+        pilha->topo = pilha->topo->anterior;
+        pilha->qtd--;
+    }
+}
+
 void mostrar(Pilha *pilha){
     Celula *atual = pilha->topo;
     printf("TOPO -> ");
@@ -51,6 +65,10 @@ int main(){
     Pilha *pilha = criar_pilha();
     for(int i = 0; i < 10; i++){
         push(pilha, i);
+        mostrar(pilha);
+    }
+    for(int i = 0; i < 10; i++){
+        pop(pilha);
         mostrar(pilha);
     }
     return 0;
