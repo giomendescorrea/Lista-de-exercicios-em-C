@@ -37,6 +37,7 @@ int esta_vazia(Lista *lista) {
 int encontrar_posicao(Lista *lista, int valor) {
     int i = 0;
     while(i < lista->n && valor > lista->valores[i]){
+        printf("estou na posição %d \n", i);
         i++;
     }
     return i;
@@ -50,6 +51,7 @@ int encontrar_posicao(Lista *lista, int valor) {
  */
 void deslocar_direita(Lista *lista, int indice) {
     for (int i = lista->n; i > indice; i--){
+        printf("estou no índice %d \n", i);
         lista->valores[i] = lista->valores[i-1];
     }
 }
