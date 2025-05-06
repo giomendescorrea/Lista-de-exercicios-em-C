@@ -85,26 +85,26 @@ void inserir(Arvore* arvore, int valor){
 
 int remover_vertice(Arvore* arvore, Vertice* vertice) {
     int filho = 0;
-    Vertice *filho_lado = NULL;
-    if(vertice->dir == NULL && vertice->esq == NULL){
-        filho = 0;
-    }else if((vertice->dir != NULL && vertice->esq == NULL) || (vertice->dir == NULL && vertice->esq != NULL)){
-        filho = 1;
-    }else{
-        filho = 2;
-    }
+	if(vertice->esq != NULL){
+		filho++;
+	}
+	if(vertice->dir != NULL){
+		filho++;
+	}
+	Vertice *filho_lado = NULL;
+    
     
     if(filho == 0){
         if(arvore->raiz == vertice){
-            arvore->raiz == NULL;
+            arvore->raiz = NULL;
         }
         else if(vertice->pai->esq == vertice){
-            vertice->pai->esq == NULL;
+            vertice->pai->esq = NULL;
         }
         else if(vertice->pai->dir == vertice){
-            vertice->pai->dir == NULL;
+            vertice->pai->dir = NULL;
         }
-        free(vertice);
+		free(vertice);
     }
 
     else if(filho == 1){
@@ -116,10 +116,10 @@ int remover_vertice(Arvore* arvore, Vertice* vertice) {
         }
         
         if(arvore->raiz == vertice){
-            arvore->raiz == filho_lado;
+            arvore->raiz = filho_lado;
             filho_lado->pai = NULL;
         }
-        if(vertice->pai->esq == vertice){
+        else if(vertice->pai->esq == vertice){
             vertice->pai->esq = filho_lado;
             filho_lado->pai = vertice->pai;
         }
@@ -128,7 +128,6 @@ int remover_vertice(Arvore* arvore, Vertice* vertice) {
             filho_lado->pai = vertice->pai;
         }
     }
-
     else{
         Vertice *atual = vertice->esq;
         while(atual->dir != NULL){
@@ -137,6 +136,7 @@ int remover_vertice(Arvore* arvore, Vertice* vertice) {
         vertice->valor = atual->valor;
         remover_vertice(arvore, atual);
     }
+	return 0;
 }
 
 Vertice *buscar_valor(Arvore* arvore, int valor){
